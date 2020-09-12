@@ -1,6 +1,6 @@
 # CoinClipper.BtcWallet
 
-Simple api hosting a btc wallet
+Simple api hosting a btc wallet on a linux docker image
 
     public interface IWalletService
     {
