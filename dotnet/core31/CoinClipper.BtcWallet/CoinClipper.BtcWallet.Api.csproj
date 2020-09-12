@@ -8,12 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\**" />
+    <Content Remove="wwwroot\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
+    <None Remove="wwwroot\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Wallets\acdc753e-7b8c-47e2-baba-e91ab3365305" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Wallets\" />
-    <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>

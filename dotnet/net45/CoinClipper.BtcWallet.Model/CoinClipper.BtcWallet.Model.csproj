@@ -41,55 +41,52 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\core21\CoinClipper.BtcWallet\Model\AddressHistory.cs">
+    <Compile Include="..\..\core31\CoinClipper.BtcWallet\Model\AddressHistory.cs">
       <Link>AddressHistory.cs</Link>
     </Compile>
-    <Compile Include="..\..\core21\CoinClipper.BtcWallet\Model\BtcAddress.cs">
+    <Compile Include="..\..\core31\CoinClipper.BtcWallet\Model\BtcAddress.cs">
       <Link>BtcAddress.cs</Link>
     </Compile>
-    <Compile Include="..\..\core21\CoinClipper.BtcWallet\Model\BtcWallet.cs">
+    <Compile Include="..\..\core31\CoinClipper.BtcWallet\Model\BtcWallet.cs">
       <Link>BtcWallet.cs</Link>
     </Compile>
-    <Compile Include="..\..\core21\CoinClipper.BtcWallet\Model\BtcWalletHistory.cs">
+    <Compile Include="..\..\core31\CoinClipper.BtcWallet\Model\BtcWalletHistory.cs">
       <Link>BtcWalletHistory.cs</Link>
     </Compile>
-    <Compile Include="..\..\core21\CoinClipper.BtcWallet\Model\CloseWalletResult.cs">
+    <Compile Include="..\..\core31\CoinClipper.BtcWallet\Model\CloseWalletResult.cs">
       <Link>CloseWalletResult.cs</Link>
     </Compile>
-    <Compile Include="..\..\core21\CoinClipper.BtcWallet\Model\Exceptions\AuthFailedException.cs">
-      <Link>Exceptions\AuthFailedException.cs</Link>
-    </Compile>
-    <Compile Include="..\..\core21\CoinClipper.BtcWallet\Model\Exceptions\IncorrectMnumonicException.cs">
+    <Compile Include="..\..\core31\CoinClipper.BtcWallet\Model\Exceptions\IncorrectMnumonicException.cs">
       <Link>Exceptions\IncorrectMnumonicException.cs</Link>
     </Compile>
-    <Compile Include="..\..\core21\CoinClipper.BtcWallet\Model\Exceptions\IncorrectNetworkException.cs">
+    <Compile Include="..\..\core31\CoinClipper.BtcWallet\Model\Exceptions\IncorrectNetworkException.cs">
       <Link>Exceptions\IncorrectNetworkException.cs</Link>
     </Compile>
-    <Compile Include="..\..\core21\CoinClipper.BtcWallet\Model\Exceptions\WalletExistsException.cs">
+    <Compile Include="..\..\core31\CoinClipper.BtcWallet\Model\Exceptions\WalletExistsException.cs">
       <Link>Exceptions\WalletExistsException.cs</Link>
     </Compile>
-    <Compile Include="..\..\core21\CoinClipper.BtcWallet\Model\Exceptions\WalletNotOpenException.cs">
+    <Compile Include="..\..\core31\CoinClipper.BtcWallet\Model\Exceptions\WalletNotOpenException.cs">
       <Link>Exceptions\WalletNotOpenException.cs</Link>
     </Compile>
-    <Compile Include="..\..\core21\CoinClipper.BtcWallet\Model\GenerateWalletResult.cs">
+    <Compile Include="..\..\core31\CoinClipper.BtcWallet\Model\GenerateWalletResult.cs">
       <Link>GenerateWalletResult.cs</Link>
     </Compile>
-    <Compile Include="..\..\core21\CoinClipper.BtcWallet\Model\GetBalancesResult.cs">
+    <Compile Include="..\..\core31\CoinClipper.BtcWallet\Model\GetBalancesResult.cs">
       <Link>GetBalancesResult.cs</Link>
     </Compile>
-    <Compile Include="..\..\core21\CoinClipper.BtcWallet\Model\IWalletService.cs">
+    <Compile Include="..\..\core31\CoinClipper.BtcWallet\Model\IWalletService.cs">
       <Link>IWalletService.cs</Link>
     </Compile>
-    <Compile Include="..\..\core21\CoinClipper.BtcWallet\Model\OpenWalletResult.cs">
+    <Compile Include="..\..\core31\CoinClipper.BtcWallet\Model\OpenWalletResult.cs">
       <Link>OpenWalletResult.cs</Link>
     </Compile>
-    <Compile Include="..\..\core21\CoinClipper.BtcWallet\Model\ReceiveResult.cs">
+    <Compile Include="..\..\core31\CoinClipper.BtcWallet\Model\ReceiveResult.cs">
       <Link>ReceiveResult.cs</Link>
     </Compile>
-    <Compile Include="..\..\core21\CoinClipper.BtcWallet\Model\RecoverWalletResult.cs">
+    <Compile Include="..\..\core31\CoinClipper.BtcWallet\Model\RecoverWalletResult.cs">
       <Link>RecoverWalletResult.cs</Link>
     </Compile>
-    <Compile Include="..\..\core21\CoinClipper.BtcWallet\Model\SendResult.cs">
+    <Compile Include="..\..\core31\CoinClipper.BtcWallet\Model\SendResult.cs">
       <Link>SendResult.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
