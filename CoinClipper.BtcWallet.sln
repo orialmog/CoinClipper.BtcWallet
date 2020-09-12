@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30320.27
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "coinclipper.btcwallet", "coinclipper.btcwallet.dcproj", "{3EA71C33-3BC5-4A3A-8270-BEA1C1500907}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoinClipper.BtcWallet.Model", "dotnet\net45\CoinClipper.BtcWallet.Model\CoinClipper.BtcWallet.Model.csproj", "{54C2DA18-A357-4E63-8EEB-6CED85D91332}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core31", "core31", "{DD81DE19-3BB0-4B6C-89D3-9EBC68AD5624}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net45", "net45", "{458BA6A8-741B-455E-AB4E-73F2F2727B9D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoinClipper.BtcWallet.Api", "dotnet\core31\CoinClipper.BtcWallet\CoinClipper.BtcWallet.Api.csproj", "{FD4E9793-61D4-48D8-B982-3F8609B1BB97}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3EA71C33-3BC5-4A3A-8270-BEA1C1500907}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EA71C33-3BC5-4A3A-8270-BEA1C1500907}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EA71C33-3BC5-4A3A-8270-BEA1C1500907}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EA71C33-3BC5-4A3A-8270-BEA1C1500907}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54C2DA18-A357-4E63-8EEB-6CED85D91332}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54C2DA18-A357-4E63-8EEB-6CED85D91332}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54C2DA18-A357-4E63-8EEB-6CED85D91332}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54C2DA18-A357-4E63-8EEB-6CED85D91332}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD4E9793-61D4-48D8-B982-3F8609B1BB97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD4E9793-61D4-48D8-B982-3F8609B1BB97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD4E9793-61D4-48D8-B982-3F8609B1BB97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD4E9793-61D4-48D8-B982-3F8609B1BB97}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{54C2DA18-A357-4E63-8EEB-6CED85D91332} = {458BA6A8-741B-455E-AB4E-73F2F2727B9D}
+		{FD4E9793-61D4-48D8-B982-3F8609B1BB97} = {DD81DE19-3BB0-4B6C-89D3-9EBC68AD5624}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BEF83D1C-0BE8-4C3D-9D59-0D3DBFCA1E2D}
+	EndGlobalSection
+EndGlobal
