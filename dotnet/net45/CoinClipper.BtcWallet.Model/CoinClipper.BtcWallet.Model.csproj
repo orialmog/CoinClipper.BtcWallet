@@ -53,6 +53,9 @@
     <Compile Include="..\..\core31\CoinClipper.BtcWallet\Model\BtcWalletHistory.cs">
       <Link>BtcWalletHistory.cs</Link>
     </Compile>
+    <Compile Include="..\..\core31\CoinClipper.BtcWallet\Model\BtcWalletStatus.cs">
+      <Link>BtcWalletStatus.cs</Link>
+    </Compile>
     <Compile Include="..\..\core31\CoinClipper.BtcWallet\Model\CloseWalletResult.cs">
       <Link>CloseWalletResult.cs</Link>
     </Compile>
@@ -88,6 +91,9 @@
     </Compile>
     <Compile Include="..\..\core31\CoinClipper.BtcWallet\Model\SendResult.cs">
       <Link>SendResult.cs</Link>
+    </Compile>
+    <Compile Include="..\..\core31\CoinClipper.BtcWallet\Model\WalletStatusEnum.cs">
+      <Link>WalletStatusEnum.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

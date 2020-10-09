@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Linq;
 using CoinClipper.BtcWallet.Api.Model;
-using CoinClipper.BtcWallet.Api.Model.Exceptions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
 
 namespace CoinClipper.BtcWallet.Api.Controllers
 {
@@ -20,7 +17,7 @@ namespace CoinClipper.BtcWallet.Api.Controllers
 
         [HttpGet]
         [Route("/list")]
-        public ActionResult<string[]> ListWallets()
+        public ActionResult<BtcWalletStatus[]> ListWallets()
         {
             return _service.ListWallets();
 

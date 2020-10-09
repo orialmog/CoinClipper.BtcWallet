@@ -7,10 +7,9 @@ EXPOSE 44311
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1 AS build
 WORKDIR /src
-COPY dotnet/core31/CoinClipper.BtcWallet/CoinClipper.BtcWallet.Api.csproj CoinClipper.BtcWallet/
+COPY CoinClipper.BtcWallet.Api.csproj CoinClipper.BtcWallet/
 RUN dotnet restore CoinClipper.BtcWallet/CoinClipper.BtcWallet.Api.csproj
 COPY . .
-WORKDIR /src/CoinClipper.BtcWallet
 RUN dotnet build CoinClipper.BtcWallet.Api.csproj -c Release -o /app
 
 FROM build AS publish

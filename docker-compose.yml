@@ -7,7 +7,7 @@ services:
       - ASPNETCORE_URLS=http://+:5000
     image: ${DOCKER_REGISTRY}coinclipper.btcwallet
     build:
-      context: .
-      dockerfile: dotnet/core31/CoinClipper.BtcWallet/Dockerfile
+      context: dotnet/core31/CoinClipper.BtcWallet/.
+      dockerfile: Dockerfile
     ports:
-      - "8082:5000" 
+      - "8099:5000" 

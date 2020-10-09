@@ -4,13 +4,17 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
     <UserSecretsId>fe340e17-c0a9-4594-b809-82bbafafca25</UserSecretsId>
-    <AssemblyName>CoinClipper.BtcWallet.Api</AssemblyName>
+    <AssemblyName>CoinClipper.BtcWallet.Api</AssemblyName> 
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="dotnet\**" />
     <Compile Remove="wwwroot\**" />
+    <Content Remove="dotnet\**" />
     <Content Remove="wwwroot\**" />
+    <EmbeddedResource Remove="dotnet\**" />
     <EmbeddedResource Remove="wwwroot\**" />
+    <None Remove="dotnet\**" />
     <None Remove="wwwroot\**" />
   </ItemGroup>
 
@@ -24,6 +28,7 @@
 
   <ItemGroup>
     <PackageReference Include="HBitcoin" Version="0.1.8.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Hosting.WindowsServices" Version="3.1.8" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="System.Runtime.Caching" Version="4.7.0" />

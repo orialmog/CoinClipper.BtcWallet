@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Hosting.WindowsServices;
+using Microsoft.AspNetCore.Hosting; 
+
 
 namespace CoinClipper.BtcWallet.Api
 {
@@ -18,17 +18,7 @@ namespace CoinClipper.BtcWallet.Api
                 .UseStartup<Startup>()
                 .Build();
 
-            if (Debugger.IsAttached)
-            {
-                Debugger.Launch();
-                host.Run();
-            }
-            else
-            {
-                host.RunAsService();
-            }
-        }
-
-    
+            host.Run(); 
+        } 
     }
 }

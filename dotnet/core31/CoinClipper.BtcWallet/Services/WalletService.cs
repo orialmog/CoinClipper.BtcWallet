@@ -23,16 +23,9 @@ namespace CoinClipper.BtcWallet.Api.Services
         private readonly MemoryCache _attemptCache = new MemoryCache("attempts");
         private readonly MemoryCache _safeCache = new MemoryCache("safes");
         private static readonly Dictionary<string, string> FileNameFromRequestTokens = new Dictionary<string, string>();
-        private static readonly Dictionary<string, WalletOpenStatus> OpenFailedAttempts = new Dictionary<string, WalletOpenStatus>();
+        private static readonly Dictionary<string, WalletStatusEnum> OpenFailedAttempts = new Dictionary<string, WalletStatusEnum>();
 
-        public enum WalletOpenStatus
-        {
-            Success = 0,
-            First = 1,
-            Second = 2,
-            Third = 3,
-            LockedOut = 4
-        }
+
 
 
         private readonly CacheItemPolicy _attemptPolicy = new CacheItemPolicy()
@@ -94,14 +87,14 @@ namespace CoinClipper.BtcWallet.Api.Services
             }
         }
 
-        private WalletOpenStatus DecryptWallet(string fileName, string password, out Safe safe)
+        private WalletStatusEnum DecryptWallet(string fileName, string password, out Safe safe)
         {
             safe = null;
 
             if (_attemptCache.Contains(fileName))
             {
-                var attempt = (WalletOpenStatus)_attemptCache.Get(fileName);
-                if (attempt == WalletOpenStatus.LockedOut)
+                var attempt = (WalletStatusEnum)_attemptCache.Get(fileName);
+                if (attempt == WalletStatusEnum.LockedOut)
                 {
                     return attempt;
                 }
@@ -112,14 +105,14 @@ namespace CoinClipper.BtcWallet.Api.Services
                 safe = Safe.Load(password, GetWalletFilePath(fileName));
                 AssertCorrectNetwork(safe.Network);
 
-                return WalletOpenStatus.Success;
+                return WalletStatusEnum.Open;
             }
             catch (System.Security.SecurityException)
             {
                 if (_attemptCache.Contains(fileName))
                 {
-                    var attempt = (WalletOpenStatus)_attemptCache.Get(fileName);
-                    if (attempt < WalletOpenStatus.LockedOut)
+                    var attempt = (WalletStatusEnum)_attemptCache.Get(fileName);
+                    if (attempt < WalletStatusEnum.LockedOut)
                     {
                         attempt += 1;
                         _attemptCache.Set(fileName, attempt, _attemptPolicy);
@@ -128,20 +121,31 @@ namespace CoinClipper.BtcWallet.Api.Services
                 }
                 else
                 {
-                    _attemptCache.Add(new CacheItem(fileName, WalletOpenStatus.First), _safesPolicy);
-                    return WalletOpenStatus.First;
+                    _attemptCache.Add(new CacheItem(fileName, WalletStatusEnum.FirstLoginAttempt), _safesPolicy);
+                    return WalletStatusEnum.FirstLoginAttempt;
                 }
             }
         }
 
-        public string[] ListWallets()
+        public CoinClipper.BtcWallet.Api.Model.BtcWalletStatus[] ListWallets()
         {
             var walletDirName = "Wallets";
-            return Directory.CreateDirectory(walletDirName)
+            var files = Directory.CreateDirectory(walletDirName)
                  .GetFiles("*.*")
                  .Select(f => f.Name)
                  .ToArray();
+            var results = new List<BtcWalletStatus>();
+            foreach (var item in files)
+            {
 
+                results.Add(new BtcWalletStatus()
+                {
+                    Status = FileNameFromRequestTokens.ContainsValue(item) ? WalletStatusEnum.Open : WalletStatusEnum.Closed,
+                    FileName = item
+                });
+            }
+
+            return results.ToArray();
         }
 
 
@@ -224,7 +228,6 @@ namespace CoinClipper.BtcWallet.Api.Services
                     QBitNinjaJutsus.GetBalances(elem.Value, out confirmedBalance, out unconfirmedBalance);
                     if (confirmedBalance != Money.Zero || unconfirmedBalance != Money.Zero)
                     {
-
                         result[elem.Key].ConfirmedBalance = confirmedBalance.ToDecimal(MoneyUnit.BTC);
                         result[elem.Key].UnconfirmedBalance = unconfirmedBalance.ToDecimal(MoneyUnit.BTC);
                     }
@@ -300,12 +303,12 @@ namespace CoinClipper.BtcWallet.Api.Services
         {
             var attempt = DecryptWallet(fileName, password, out Safe safe);
 
-            if (attempt != WalletOpenStatus.Success)
+            if (attempt != WalletStatusEnum.Open)
             {
                 return new OpenWalletResult()
                 {
                     Success = false,
-                    Message = attempt == WalletOpenStatus.LockedOut ?
+                    Message = attempt == WalletStatusEnum.LockedOut ?
                                 "Locked out, come back in 5 mins" :
                                 "Invalid password",
                     FileName = fileName,
@@ -335,7 +338,6 @@ namespace CoinClipper.BtcWallet.Api.Services
             var id = Guid.NewGuid();
             var walletFilePath = GetWalletFilePath(id.ToString());
             AssertWalletNotExists(walletFilePath);
-
 
             Mnemonic mnemonic;
             var safe = Safe.Create(out mnemonic, password, walletFilePath, Config.Network);
@@ -426,7 +428,7 @@ namespace CoinClipper.BtcWallet.Api.Services
         public SendResult Send(string requestToken, string address, string btcAmount)
         {
             Safe safe = GetSafeFromCache(requestToken);
-           
+
             BitcoinAddress addressToSend = null;
 
             var Exit = new Func<string, SendResult>(
@@ -695,7 +697,7 @@ namespace CoinClipper.BtcWallet.Api.Services
                 throw new WalletNotOpenException("Wallet not opened");
 
             if (_attemptCache.Contains(fileName) &&
-              ((WalletOpenStatus)_attemptCache.Get(fileName)) == WalletOpenStatus.LockedOut)
+              ((WalletStatusEnum)_attemptCache.Get(fileName)) == WalletStatusEnum.LockedOut)
                 throw new WalletNotOpenException("Wallet locked out");
 
             return (Safe)_safeCache[fileName];

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace CoinClipper.BtcWallet.Api
 {
@@ -20,14 +21,18 @@ namespace CoinClipper.BtcWallet.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IWalletService, WalletService>(); 
-            services.AddMvc(options => { 
-                options.EnableEndpointRouting = false; 
+            services.AddSingleton<IWalletService, WalletService>();
+#if DEBUG
+            services.AddCors();
+#endif
+            services.AddMvc(options =>
+            {
+                options.EnableEndpointRouting = false;
             }).SetCompatibilityVersion(CompatibilityVersion.Latest);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -37,8 +42,13 @@ namespace CoinClipper.BtcWallet.Api
             {
                 app.UseHsts();
             }
-
             app.UseHttpsRedirection();
+
+#if DEBUG
+            app.UseCors(
+            options => options.WithOrigins("*").AllowAnyMethod()
+        );
+#endif 
             app.UseMvc();
         }
     }
