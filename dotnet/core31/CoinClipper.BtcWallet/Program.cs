@@ -8,6 +8,7 @@ namespace CoinClipper.BtcWallet.Api
 {
     public class Program
     {
+
         public static void Main(string[] args)
         {
             var pathToExe = Process.GetCurrentProcess().MainModule.FileName;
