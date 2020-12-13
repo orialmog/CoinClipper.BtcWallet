@@ -3,11 +3,11 @@ namespace CoinClipper.BtcWallet.Api.Model
 {
     public interface IWalletService
     {
-        BtcWalletStatus[] ListWallets();
+        BtcWalletStatus[] List();
         OpenWalletResult Open(string fileName, string password);
         CloseWalletResult Close(string requestToken);
 
-        GenerateWalletResult Generate(string password);
+        CreateWalletResult Create(string password);
         RecoverWalletResult Recover(string[] words, string password);
          
         BtcWallet GetBalances(string requestToken);

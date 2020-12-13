@@ -2,7 +2,7 @@
 
 namespace CoinClipper.BtcWallet.Api.Model
 {
-    public class GetBalancesResult
+    public class UpdateBalanceResult
     {
         public bool Success { get; set; }
         public string Message { get; set; } 

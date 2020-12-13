@@ -8,6 +8,6 @@ namespace CoinClipper.BtcWallet.Api.Model
         public decimal AmountBtc { get; set; }
         public DateTimeOffset FirstSeen { get; set; }
         public bool Confirmed { get; set; }
-        public byte[] TransactionId { get; set; }
+        public string TransactionId { get; set; }
     }
 }

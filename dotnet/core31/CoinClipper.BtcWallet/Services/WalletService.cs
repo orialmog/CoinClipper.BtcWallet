@@ -127,7 +127,7 @@ namespace CoinClipper.BtcWallet.Api.Services
             }
         }
 
-        public CoinClipper.BtcWallet.Api.Model.BtcWalletStatus[] ListWallets()
+        public CoinClipper.BtcWallet.Api.Model.BtcWalletStatus[] List()
         {
             var walletDirName = "Wallets";
             var files = Directory.CreateDirectory(walletDirName)
@@ -214,8 +214,8 @@ namespace CoinClipper.BtcWallet.Api.Services
                             AmountBtc = h.Amount.ToDecimal(MoneyUnit.BTC),
                             Confirmed = h.Confirmed,
                             FirstSeen = h.FirstSeen,
-                            TransactionId = h.TransactionId.ToBytes(lendian: true)
-                        }).ToArray()
+                            TransactionId = h.TransactionId.ToString()
+                        }).ToList()
                     });
                 }
 
@@ -237,7 +237,7 @@ namespace CoinClipper.BtcWallet.Api.Services
                 return new Model.BtcWallet
                 {
                     FileName = FileNameFromRequestTokens[requestToken],
-                    Addresses = addressHistoryRecordsPerAddresses.Select(c => result[c.Key]).ToArray(),
+                    Addresses = addressHistoryRecordsPerAddresses.Select(c => result[c.Key]).ToList(),
                     ConfirmedWalletBalance = confirmedWalletBalance.ToDecimal(MoneyUnit.BTC),
                     UnconfirmedWalletBalance = unconfirmedWalletBalance.ToDecimal(MoneyUnit.BTC)
                 };
@@ -333,7 +333,7 @@ namespace CoinClipper.BtcWallet.Api.Services
             };
         }
 
-        public GenerateWalletResult Generate(string password)
+        public CreateWalletResult Create(string password)
         {
             var id = Guid.NewGuid();
             var walletFilePath = GetWalletFilePath(id.ToString());
@@ -357,11 +357,11 @@ namespace CoinClipper.BtcWallet.Api.Services
             msg.AppendLine("-------");
             msg.AppendLine(string.Join(", ", mnemonic.Words));
             msg.AppendLine("-------");
-            return new GenerateWalletResult()
+            return new CreateWalletResult()
             {
                 Success = safe != null,
                 Message = msg.ToString(),
-                Words = mnemonic.Words,
+                Words = mnemonic.Words.ToList(),
                 FileName = id.ToString(),
                 RequestToken = token
             };
@@ -392,8 +392,8 @@ namespace CoinClipper.BtcWallet.Api.Services
                 safe = Safe.Recover(mnemonic, password, walletFilePath, Config.Network);
                 _safeCache.Add(new CacheItem(id.ToString(), safe), _safesPolicy);
                 msg.AppendLine("Wallet is successfully recovered.");
-                msg.AppendLine($"Wallet file: {walletFilePath}");
-                FileNameFromRequestTokens.Add(id.ToString(), id.ToString());
+                msg.AppendLine($"Wallet file: {walletFilePath}"); 
+                FileNameFromRequestTokens.Add(token.ToString(), id.ToString());
 
             }
             catch (Exception e)

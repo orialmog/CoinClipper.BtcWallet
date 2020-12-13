@@ -1,10 +1,12 @@
-﻿namespace CoinClipper.BtcWallet.Api.Model
+﻿using System.Collections.Generic;
+
+namespace CoinClipper.BtcWallet.Api.Model
 {
 
 
     public class BtcWallet
     {
-        public BtcAddress[] Addresses { get; set; }
+        public List<BtcAddress> Addresses { get; set; } = new List<BtcAddress>();
         public decimal ConfirmedWalletBalance { get; set; }
         public decimal UnconfirmedWalletBalance { get; set; }
         public string FileName { get; set; }

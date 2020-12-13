@@ -1,6 +1,4 @@
-﻿using CoinClipper.BtcWallet.Api.Model;
-
-namespace CoinClipper.BtcWallet.Api.Controllers
+﻿namespace CoinClipper.BtcWallet.Api.Model
 {
     public class BtcWalletHistoryResult
     {

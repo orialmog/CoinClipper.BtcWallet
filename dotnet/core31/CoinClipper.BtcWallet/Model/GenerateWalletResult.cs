@@ -1,13 +1,14 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace CoinClipper.BtcWallet.Api.Model
 {
-    public class GenerateWalletResult
+    public class CreateWalletResult
     {
-        public string[] Words { get; set; }
         public string Message { get; set; }
         public bool Success { get; set; }
-        public string FileName { get; set; }
-        public Guid RequestToken { get; set; }
+        public string FileName { get; set; } 
+        public Guid? RequestToken { get; set; }
+        public List<string> Words { get; set; } = new List<string>();
     }
 }

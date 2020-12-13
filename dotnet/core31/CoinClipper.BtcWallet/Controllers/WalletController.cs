@@ -7,29 +7,29 @@ namespace CoinClipper.BtcWallet.Api.Controllers
     [ApiController]
     public class WalletController : ControllerBase
     {
-        private readonly IWalletService _service;
+        private readonly IWalletService _walletService;
 
 
-        public WalletController(IWalletService service)
+        public WalletController(IWalletService walletService)
         {
-            _service = service;
+            _walletService = walletService;
         }
 
         [HttpGet]
         [Route("/list")]
-        public ActionResult<BtcWalletStatus[]> ListWallets()
+        public ActionResult<BtcWalletStatus[]> List()
         {
-            return _service.ListWallets();
+            return _walletService.List();
 
         }
 
         [HttpPost]
         [Route("/open")]
-        public ActionResult<OpenWalletResult> OpenWallet([FromForm()] string walletId, [FromForm()] string password)
+        public ActionResult<OpenWalletResult> Open([FromForm()] string fileName, [FromForm()] string password)
         {  
             try
             {
-                return _service.Open(walletId, password);
+                return _walletService.Open(fileName, password);
             }
             catch (Exception e)
             { 
@@ -48,7 +48,7 @@ namespace CoinClipper.BtcWallet.Api.Controllers
         {
             try
             {
-                return _service.Close(requestToken);
+                return _walletService.Close(requestToken);
 
             }
             catch (Exception e)
@@ -68,7 +68,7 @@ namespace CoinClipper.BtcWallet.Api.Controllers
         { 
             try
             {
-                return _service.Recover(words, password);
+                return _walletService.Recover(words, password);
             }
             catch (Exception e)
             {
@@ -83,18 +83,18 @@ namespace CoinClipper.BtcWallet.Api.Controllers
 
 
         [HttpPost]
-        [Route("/generate")]
-        public ActionResult<GenerateWalletResult> Generate([FromForm()] string password)
+        [Route("/create")]
+        public ActionResult<CreateWalletResult> Create([FromForm()] string password)
         {
             try
             {
-                 return _service.Generate(password);
+                 return _walletService.Create(password);
             }
             catch(Exception e)
             { 
-                return new GenerateWalletResult
+                return new CreateWalletResult
                 {
-                    Message = e.Message.ToString(),
+                    Message = e.Message,
                     Success = false
                 };
             }
@@ -105,9 +105,9 @@ namespace CoinClipper.BtcWallet.Api.Controllers
 
         [HttpGet]
         [Route("/balances")]
-        public ActionResult<GetBalancesResult> GetBalances([FromHeader] string requestToken)
+        public ActionResult<UpdateBalanceResult> GetBalances([FromHeader] string requestToken)
         {
-            var result = new GetBalancesResult
+            var result = new UpdateBalanceResult
             {
                 Requested = DateTime.Now
             };
@@ -115,14 +115,14 @@ namespace CoinClipper.BtcWallet.Api.Controllers
             try
             {
 
-                result.Wallet = _service.GetBalances(requestToken);
+                result.Wallet = _walletService.GetBalances(requestToken);
                 result.Message = $"Got wallet balances";
                 result.Success = true;
 
             }
             catch (Exception e)
             {
-                result.Message = e.Message.ToString();
+                result.Message = e.Message;
                 result.Success = false;
             }
 
@@ -136,13 +136,13 @@ namespace CoinClipper.BtcWallet.Api.Controllers
         {
             try
             {
-                return _service.Send(requestToken, destinationAddress, amountBtc);
+                return _walletService.Send(requestToken, destinationAddress, amountBtc);
             }
             catch (Exception e)
             {
                 return new SendResult
                 {
-                    Message = e.Message.ToString(),
+                    Message = e.Message,
                     Success = false
                 };
             }
@@ -159,14 +159,14 @@ namespace CoinClipper.BtcWallet.Api.Controllers
             try
             {
 
-                result.Addresses = _service.Receive(requestToken);
+                result.Addresses = _walletService.Receive(requestToken);
                 result.Message = "Valid receive addresses";
                 result.Success = true;
 
             }
             catch (Exception e)
             {
-                result.Message = e.Message.ToString();
+                result.Message = e.Message;
                 result.Success = false;
             }
 
@@ -181,14 +181,14 @@ namespace CoinClipper.BtcWallet.Api.Controllers
             try
             {
 
-                result.History = _service.GetHistory(requestToken);
-                result.Message = $"Wallet history";
+                result.History = _walletService.GetHistory(requestToken);
+                result.Message = "Wallet history";
                 result.Success = true;
 
             }
             catch (Exception e)
             {
-                result.Message = e.Message.ToString();
+                result.Message = e.Message;
                 result.Success = false;
             }
 
